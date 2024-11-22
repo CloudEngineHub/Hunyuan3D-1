@@ -23,6 +23,7 @@
 # by Tencent in accordance with TENCENT HUNYUAN COMMUNITY LICENSE AGREEMENT.
 
 import os
+import gc
 import time
 import math
 import cv2
@@ -165,6 +166,7 @@ class SVRMModel(torch.nn.Module):
         triplane_gen = self.img_to_triplane_decoder(input_view_feat)  # [b, 3, tri_dim, h, w]
         del input_view_feat
         torch.cuda.empty_cache()
+        gc.collect()
 
         # --- triplane nerf render
 
